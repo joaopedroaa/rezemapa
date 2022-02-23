@@ -1,13 +1,23 @@
+/* eslint-disable @next/next/no-img-element */
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import useEmblaCarousel from 'embla-carousel-react'
+
 
 export default function Home() {
+  const [emblaRef] = useEmblaCarousel()
+  // const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false }, [Autoplay()])
+
 
   const images = [
     "01",
     "02",
     "03",
+    "04",
+    "05",
+    "06",
+    "07",
   ]
 
   const users = [
@@ -43,23 +53,24 @@ export default function Home() {
           Mapa oficial da Rezende Rammel no Minecraft
         </p>
 
-        <div className={styles.imagesMain}>
-          {images.map((imageName, code) => (
-            <Image
-              className={styles.imageRezende}
-              src={`/images/${imageName}.png`}
-              alt="Imagem do Rezende"
-              width={1280}
-              height={720}
-              key={code}
-            />
-          ))}
+
+
+        <div className={styles.imagesMain} ref={emblaRef}>
+          <div className={styles.embla__container}>
+            {images.map((imageName, code) => (
+              <img
+                className={styles.embla__slide}
+                src={`/images/${imageName}.png`}
+                alt="Imagem do Rezende"
+                key={code}
+              />
+            ))}
+          </div>
         </div>
 
 
         <div className={styles.download}>
-          Baixe agora
-          <a href=""></a>
+          <span>Não perca esta oportunidade e baixe agora 100% grátis</span>
           <a href="https://github.com/joaopedroaa/rezemapa/raw/master/public/Etrr.rar" className={styles.buttonDownload}>
             Baixe agora
           </a>
@@ -93,5 +104,6 @@ export default function Home() {
 
       </div>
     </div>
+
   )
 }
